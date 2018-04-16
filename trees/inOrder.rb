@@ -32,15 +32,19 @@ def array2tree(array,head)
   end
 end
 
+def recurPrint(head)
+  print "#{head.data} "
+  recurPrint(head.left) unless head.left.nil?
+  recurPrint(head.right) unless head.right.nil?
+end
+
 myarr = [8,3,10,1,6,14,4,7,13]
 head = Node.new(myarr[0])
 array2tree(myarr,head)
+recurPrint(head)
+puts
 
-puts head
-
-
-head = Node.new(47)
-inOrder(38,head)
-inOrder(45,head)
-inOrder(57,head)
-inOrder(50,head)
+ar = [10, 12, 15, 7, 2, 23, 9, 14, 21]
+head = Node.new(ar[0])
+array2tree(ar,head)
+recurPrint(head)
