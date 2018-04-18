@@ -45,14 +45,9 @@ def recurPrint(target,list = nil)
   end
 end
 
-def recurprint(target,ar,val = 0)
-  print val
-  var = ar[val].shift
-  if target == var
-    print var
-  else
-    recurprint(target,ar,var)
-  end
+def graphPrint(target,ar,val = 0)
+  print "#{val} "
+  graphPrint(target,ar,ar[val].shift) unless target == val
 end
 
 
@@ -65,11 +60,11 @@ third = [[1, 6], [2, 0, 3, 4], [3, 1], [6, 1, 2], [1, 5, 6], [4], [4, 3, 0]]
 
 
 #array2graph(conns)
-recurprint(4,conns)
+graphPrint(4,conns)
 puts
-recurprint(4,second)
+graphPrint(4,second)
 puts
-recurprint(4,third)
+graphPrint(4,third)
 
 
 
