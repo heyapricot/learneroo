@@ -39,8 +39,12 @@ def dfs(node)
   end
 end
 
-conns = [[2], [4], [5, 0, 3], [5, 2], [1, 5], [4, 2, 3]]
+def do_stuff
+  conns = [[2], [4], [5, 0, 3], [5, 2], [1, 5], [4, 2, 3]]
 
-array2graph(conns)
-node = Node.graph[0]
-dfs(node)
+  array2graph(conns)
+  node = Node.graph[0]
+  dfs(node)
+end
+
+puts do_stuff
