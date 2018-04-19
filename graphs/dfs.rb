@@ -1,11 +1,12 @@
 class Node
   @@graph = Hash.new()
 
-  attr_accessor :data, :connections
+  attr_accessor :data, :connections, :visited
 
   def initialize(data)
     @data = data
     @connections = Hash.new
+    @visited = false
     @@graph[data] = self
   end
 
@@ -32,8 +33,10 @@ def dfs(node)
 # Get all the adjacent nodes to N.
 # Call DFS on every adjacent Node that's not visited.
   print "#{node.data} "
-  
-
+  node.visited = true
+  node.connections.each_value do |conn|
+    dfs(conn) unless conn.visited
+  end
 end
 
 conns = [[2], [4], [5, 0, 3], [5, 2], [1, 5], [4, 2, 3]]
