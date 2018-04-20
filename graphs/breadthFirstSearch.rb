@@ -24,10 +24,15 @@ end
 
 def bfs(start = 0, queue = [])
 
+
   node = Node.get(start)
-  node.visited = true
-  print "#{node.data}"
-  node.connections.each {|conn| queue.push(conn) unless Node.get(conn).visited || queue.include?(conn) }
+
+  unless node.visited
+    print "#{node.data} "
+    node.connections.each {|conn| queue.push(conn) unless Node.get(conn).visited }
+    node.visited = true
+  end
+
   bfs(queue.shift(),queue) unless queue.empty?
 
 
