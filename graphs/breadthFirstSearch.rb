@@ -24,30 +24,33 @@ end
 
 def bfs(start = 0, queue = [])
 
-  current = Node.get(start)
-  print "#{current.data}"
+  node = Node.get(start)
+  node.visited = true
+  print "#{node.data}"
+  node.connections.each {|conn| queue.push(conn) unless Node.get(conn).visited || queue.include?(conn) }
+  bfs(queue.shift(),queue) unless queue.empty?
 
-  unless current.visited
-    current.connections.each do |nod|
-      queue.push(nod) unless Node.get(nod).visited
-    end
-  end
-
-  current.visited = true
-
-  if !queue.empty?
-    bfs(queue.pop,queue)
-  end
 
 end
 
 conns = [[2], [4], [5, 0, 3], [2], [1, 5], [4, 2]]
 second = [[1, 2], [0, 2], [0, 1, 3, 4, 5], [2, 4], [3, 2], [2]]
-third = [[1, 6], [2, 0, 3, 4], [3, 1], [6, 1, 2], [1, 5, 6], [4], [4, 3, 0]]
+third = [[1, 2], [0, 3, 4], [0, 5, 6], [1], [1], [2], [2]]
+fourth = [[1, 2], [0, 3, 4], [0, 5, 6], [1], [1, 5], [2, 4], [2]]
 
 array2graph(second)
 bfs
 puts
 
+array2graph(conns)
+bfs
+puts
 
+array2graph(third)
+bfs
+puts
+
+array2graph(fourth)
+bfs
+puts
 
