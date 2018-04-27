@@ -3,11 +3,15 @@ class Node
   @@head = nil
   def initialize(data)
     @data = data
-    @@head = self unless @@head.nil? == false
+    @@head = self unless !@@head.nil?
   end
 
   def self.head
     @@head
+  end
+
+  def self.clear
+    @@head = nil
   end
 
 end
@@ -23,29 +27,37 @@ def arrayToTree(array, i = 0)
   return node
 end
 
-def isSearchTree?(node, result = true, heads = [])
+def search?(node,parent = nil,isLeft = nil)
 
-  heads.push(node.data)
+  output = true
 
-  unless node.left.nil?
-    heads.each {|dat| return false if node.left.data > dat }
-    result = isSearchTree?(node.left, result, heads)
+  if !isLeft.nil? && isLeft
+    return false if !parent.nil? && node.data > parent
+    return false if !node.left.nil? && node.left.data > parent
+    return false if !node.right.nil? && node.right.data > parent
+
+  elsif !isLeft.nil? && !isLeft
+    #isRight
+    return false if !parent.nil? && node.data < parent
+    return false if !node.left.nil? && node.left.data < parent
+    return false if !node.right.nil? && node.right.data < parent
+
   end
 
-  unless node.right.nil?
-    heads.each {|dat| return false if node.right.data < dat}
-    result = isSearchTree?(node.right, result, heads)
-  end
+  output = search?(node.left,node.data, true) unless node.left.nil? || !output
+  output = search?(node.right,node.data, false) unless node.right.nil? || !output
 
-  result
+  output
+
 end
 
-ar = [20,10,27,5,14,23,30,0,12,0,0,0,0,0,0]
-arr = [20,10,27,5,14,23,30]
-arrr = [21,11,26,5,14,23,30,2,8,13,16,0,0,0,0]
+ar = [20,10,27,5,14,23,30,0,12,0,0,0,0,0,0] #false
+arr = [20,10,27,5,14,23,30] #true
+arrr = [21,11,26,5,14,23,30,2,8,13,16,0,0,0,0] #true
+a = [19,9,26,4,13,17,29] #false
 
-arrayToTree(arrr)
-puts isSearchTree?(Node.head)
+arrayToTree(a)
+puts search?(Node.head)
 
 
 
