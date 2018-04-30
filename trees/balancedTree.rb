@@ -28,6 +28,13 @@ def arrayToTree(array, i = 0)
   return node
 end
 
+# small trees find depth of all .left.nil? or .right.nil? and place the depths in an array to compare max - min > 2
+
+# large trees find first end of branch and search down to see if branch is longer than two
+
+
+
+
 def bfs(start = 0, queue = [], search = 0)
   node = Node.head
   unless node.nil?
