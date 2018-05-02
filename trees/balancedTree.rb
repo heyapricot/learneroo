@@ -1,55 +1,55 @@
+# small trees find depth of all .left.nil? or .right.nil? and place the depths in an array to compare max - min > 2
+
+# large trees find first end of branch and search down to see if branch is longer than two
+
 class Node
-  attr_accessor :left, :right, :data, :connections
-  @@head = nil
+  attr_accessor :left, :right, :data, :height
   def initialize(data)
     @data = data
-    @@head = self unless !@@head.nil?
   end
-
-  def self.head
-    @@head
-  end
-
-  def self.clear
-    @@head = nil
-  end
-
 end
 
-def arrayToTree(array, i = 0)
+def arrayToTree(array, i = 0, height = 0)
   if i >= array.length || array[i] == 0
     return
   end
 
   node = Node.new(array[i])
-  node.left = arrayToTree(array, 2*i+1)
-  node.right = arrayToTree(array, 2*i+2)
-  node.connections = [node.left, node.right]
+  node.height = height
+  height += 1
+  node.left = arrayToTree(array, 2*i+1, height)
+  node.right = arrayToTree(array, 2*i+2, height)
   return node
 end
 
-# small trees find depth of all .left.nil? or .right.nil? and place the depths in an array to compare max - min > 2
-
-# large trees find first end of branch and search down to see if branch is longer than two
-
-
-
-
-def bfs(start = 0, queue = [], search = 0)
-  node = Node.head
-  unless node.nil?
-    node.balance = false if node.data == 0
-    node.connections.each {|conn| queue.push(conn)}
-  end
-  bfs(queue.shift(),queue) unless queue.empty?
+def bfs(node, queue = [])
+  $arr << node.height if node.left.nil? || node.right.nil?
+  queue << node.left unless node.left.nil?
+  queue << node.right unless node.right.nil?
+  bfs(queue.shift,queue) unless queue.empty?
 end
 
+ar = [1, 2, 0, 3, 0, 0, 0] #false
+arr = [1, 0 ,2] #true
+arrr = [1, 2, 3, 4, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 7] #false
+a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 10, 0, 0] #true
 
-ar = [20,10,27,5,14,23,30,0,12,0,0,0,0,0,0] #false
-arr = [20,10,27,5,14,23,30] #true
-arrr = [21,11,26,5,14,23,30,2,8,13,16,0,0,0,0] #true
-a = [19,9,26,4,13,17,29] #false
+$arr = []
+bfs(arrayToTree(ar))
+print $arr
+puts $arr.max - $arr.min < 2
 
-arrayToTree(a)
-bfs(Node.head)
-Node.clear
+$arr = []
+bfs(arrayToTree(arr))
+print $arr
+puts $arr.max - $arr.min < 2
+
+$arr = []
+bfs(arrayToTree(arrr))
+print $arr
+puts $arr.max - $arr.min < 2
+
+$arr = []
+bfs(arrayToTree(a))
+print $arr
+puts $arr.max - $arr.min < 2
