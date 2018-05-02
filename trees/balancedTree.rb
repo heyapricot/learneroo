@@ -23,7 +23,10 @@ def arrayToTree(array, i = 0, height = 0)
 end
 
 def bfs(node, queue = [])
+  #store height of terminal node
   $arr << node.height if node.left.nil? || node.right.nil?
+  #stop breadth first search if branch terminates 2 early
+  return false if $arr.size > 1 && $arr.max - $arr.min > 1
   queue << node.left unless node.left.nil?
   queue << node.right unless node.right.nil?
   bfs(queue.shift,queue) unless queue.empty?
@@ -33,6 +36,7 @@ ar = [1, 2, 0, 3, 0, 0, 0] #false
 arr = [1, 0 ,2] #true
 arrr = [1, 2, 3, 4, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 7] #false
 a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 10, 0, 0] #true
+arrrr = [1, 2, 3, 4, 0, 0, 5, 6, 0, 0, 0, 0, 0, 0, 7, 2, 8, 0, 10, 1, 0, 0] #false
 
 $arr = []
 bfs(arrayToTree(ar))
@@ -51,5 +55,10 @@ puts $arr.max - $arr.min < 2
 
 $arr = []
 bfs(arrayToTree(a))
+print $arr
+puts $arr.max - $arr.min < 2
+
+$arr = []
+bfs(arrayToTree(arrrr))
 print $arr
 puts $arr.max - $arr.min < 2
