@@ -6,13 +6,9 @@ class Node
   def initialize(data)
     @data = data
     @connections = Hash.new
-    @visited = false
     @@graph[data] = self
   end
 
-  def self.graph
-    @@graph
-  end
 end
 
 def array2graph(connections)
