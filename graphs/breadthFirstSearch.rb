@@ -3,11 +3,11 @@ require_relative "graph"
 def bfs(start = 0, queue = [])
 
 
-  node = Node.get(start)
+  node = Graph.getNode(start)
 
   unless node.visited
     print "#{node.data} "
-    node.connections.each {|conn| queue.push(conn) unless Node.get(conn).visited }
+    node.connections.each {|conn| queue.push(conn) unless Graph.getNode(conn).visited }
     node.visited = true
   end
 
