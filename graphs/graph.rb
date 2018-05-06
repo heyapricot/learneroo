@@ -40,12 +40,17 @@ class Graph
 
     bfs(queue.shift(),queue, output) unless queue.empty?
 
-    #End of bfs execution
-    unvisit_nodes
     output
   end
 
-  private
+  def dfs(start = 0, output = [])
+    node = nodes[start]
+    output.push(node.data)
+    node.visited = true
+    node.connections.each {|conn| dfs(conn,output) unless nodes[conn].visited }
+
+    output
+  end
 
   def unvisit_nodes
     nodes.values.each do |node|
