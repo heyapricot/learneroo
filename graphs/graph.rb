@@ -70,9 +70,11 @@ class Graph
 
     conns.each do |conn|
 
-      return true if nodes[conn].visited
-
-      output = hasCycle?(conn,node.data) unless nodes[conn].visited
+      if nodes[conn].visited
+        return true
+      else
+        output = hasCycle?(conn,node.data)
+      end
 
     end
 
