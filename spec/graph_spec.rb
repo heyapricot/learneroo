@@ -19,4 +19,24 @@ describe Graph do
     let(:graph) {Graph.new}
 
   end
+
+  it "can add Nodes to itself" do
+    graph = Graph.new
+    graph.addNode(Node.new(1))
+    expect(graph.getNode(1).data).to be 1
+  end
+
+  it "can get a specific node" do
+
+
+  end
+
+  it "can create a Graph from an array" do
+
+  end
+
+
+  it "can traverse nodes using breadth first search" do
+
+  end
 end
