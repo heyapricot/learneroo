@@ -15,13 +15,10 @@ end
 
 
 describe Graph do
-  context "when a Graph is instantiated" do
-    let(:graph) {Graph.new}
 
-  end
+  let(:graph) {Graph.new}
 
   it "can add Nodes to itself" do
-    graph = Graph.new
     graph.addNode(Node.new(1))
     expect(graph.getNode(1).data).to be 1
   end
