@@ -87,5 +87,23 @@ describe Graph do
     end
   end
 
+  context "checking the graph is one connected" do
+
+    let(:graph) {Graph.new}
+
+    it "returns true for a one conected graph" do
+      ar = [[1, 2], [0, 3, 4], [0, 5, 6], [1], [1], [2], [2]]
+      graph.fromArray(ar)
+      expect(graph.oneConnected?).to be true
+    end
+
+    it "returns false for a graph not one connected" do
+      ar = [[1, 2], [0, 4], [0, 4], [5, 6], [1, 2, 7], [3], [3], [4]]
+      graph.fromArray(ar)
+      expect(graph.oneConnected?).to be false
+    end
+
+  end
+
 
 end

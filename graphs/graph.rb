@@ -52,6 +52,14 @@ class Graph
     output
   end
 
+  def oneConnected?
+    if dfs.sort == nodes.keys.sort
+      return true
+    else
+      return false
+    end
+  end
+
   def unvisit_nodes
     nodes.values.each do |node|
       node.visited = false
