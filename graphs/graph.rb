@@ -60,9 +60,33 @@ class Graph
     end
   end
 
+  def hasCycle?(start = nodes.keys.first, parent = nil, output = false)
+
+    node = nodes[start]
+    node.visited = true
+
+    conns = node.connections.dup
+    conns.delete(parent)
+
+    conns.each do |conn|
+
+      return true if nodes[conn].visited
+
+      output = hasCycle?(conn,node.data) unless nodes[conn].visited
+
+    end
+
+    output
+
+  end
+
   def unvisit_nodes
     nodes.values.each do |node|
       node.visited = false
     end
+  end
+
+  def drop_nodes
+    nodes = Hash.new
   end
 end

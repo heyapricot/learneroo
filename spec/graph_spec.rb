@@ -55,6 +55,7 @@ describe Graph do
       end
 
     end
+
   end
 
 
@@ -103,6 +104,36 @@ describe Graph do
       expect(graph.oneConnected?).to be false
     end
 
+  end
+
+  context "detecting cycles" do
+
+    let(:graph) {Graph.new}
+
+    it "returns true for a graph with a cycle" do
+      tests = Array.new
+      tests.push([[2], [4], [0, 5, 3], [5, 2], [5, 1], [4, 2, 3]])
+      tests.push([[1, 2], [0, 2], [0, 1, 3, 4, 5], [2, 4], [3, 2], [2]])
+
+      tests.each do |test|
+        graph.fromArray(test)
+        expect(graph.hasCycle?).to be true
+        graph.drop_nodes
+      end
+
+    end
+
+    it "returns false for a graph with no cycles" do
+      tests = Array.new
+      tests.push(	[[2], [2], [0, 1, 3, 4, 5], [2], [2], [2]])
+      tests.push(	[[1, 2], [0, 3, 4], [0, 5, 6], [1], [1], [2], [2]])
+      tests.push(	[[2], [4, 3], [0, 5], [5, 1], [1], [2, 3]])
+
+      tests.each do |test|
+        graph.fromArray(test)
+        expect(graph.hasCycle?).to be false
+        graph.drop_nodes
+      end    end
   end
 
 
