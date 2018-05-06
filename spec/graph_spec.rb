@@ -19,8 +19,11 @@ describe Graph do
   let(:graph) {Graph.new}
 
   it "can add Nodes to itself" do
-    graph.addNode(Node.new(1))
-    expect(graph.getNode(1).data).to be 1
+    NUMBER_OF_NODES = 10
+    NUMBER_OF_NODES.times do |n|
+      graph.addNode(Node.new(n))
+    end
+    expect(graph.nodes.length).to be NUMBER_OF_NODES
   end
 
   it "can get a specific node" do
