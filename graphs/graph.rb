@@ -53,11 +53,7 @@ class Graph
   end
 
   def oneConnected?
-    if dfs.sort == nodes.keys.sort
-      return true
-    else
-      return false
-    end
+    dfs.sort == nodes.keys.sort ? true : false
   end
 
   def hasCycle?(node = nodes.values.first, previous = nil, output = false)
