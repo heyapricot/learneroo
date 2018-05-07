@@ -60,20 +60,19 @@ class Graph
     end
   end
 
-  def hasCycle?(start = nodes.keys.first, parent = nil, output = false)
+  def hasCycle?(node = nodes.values.first, previous = nil, output = false)
 
-    node = nodes[start]
     node.visited = true
 
     conns = node.connections.dup
-    conns.delete(parent)
+    conns.delete(previous)
 
     conns.each do |conn|
 
       if nodes[conn].visited
         return true
       else
-        output = hasCycle?(conn,node.data)
+        output = hasCycle?(nodes[conn],node.data)
       end
 
     end
