@@ -23,6 +23,7 @@ class Graph
   end
 
   def fromArray(ar)
+    nodes.clear
     ar.each_with_index do |val,i|
       add(Node.new(i,val))
     end
