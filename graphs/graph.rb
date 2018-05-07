@@ -84,7 +84,4 @@ class Graph
     end
   end
 
-  def drop_nodes
-    nodes = Hash.new
-  end
 end

@@ -118,7 +118,7 @@ describe Graph do
       tests.each do |test|
         graph.fromArray(test)
         expect(graph.hasCycle?).to be true
-        graph.drop_nodes
+        graph.nodes.clear
       end
 
     end
@@ -132,7 +132,7 @@ describe Graph do
       tests.each do |test|
         graph.fromArray(test)
         expect(graph.hasCycle?).to be false
-        graph.drop_nodes
+        graph.nodes.clear
       end    end
   end
 
