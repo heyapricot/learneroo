@@ -26,7 +26,7 @@ context "creating a graph from a 'matrix'" do
   it "saves the connections with the adjacent numbers" do
     my_map.fromArray(tests[2])
     expect(my_map.nodes[0].connections).to match_array([6,7])
-    expect(my_map.nodes[1].conenctions).to match_array([2,9,8])
+    expect(my_map.nodes[1].connections).to match_array([2,9,8])
     expect(my_map.nodes[5].connections).to match_array([7,9,6,7])
   end
 end
