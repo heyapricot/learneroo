@@ -49,6 +49,7 @@ context "finding the peaks of highest area" do
     tests.push(	[[3, 6, 9, 11, 3], [5, 8, 12, 4, 6], [7, 10, 13, 2, 14], [0, 1, 5, 9, 3], [2, 8, 6, 4, 0]])
 
     #Be very careful with the order of tests and results
+    #results contains the smallest and largest area around a peak
 
     results.push([3,6])
     results.push([1,3])
