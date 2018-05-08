@@ -2,6 +2,8 @@ require_relative "../others/map"
 require_relative "../graphs/graph"
 
 context "creating a graph from a 'matrix'" do
+  let(:my_map) { Map.new }
+
   tests = Array.new
 
   tests.push([[9, 8, 5], [5, 6, 3], [8, 4, 1]])
@@ -13,24 +15,19 @@ context "creating a graph from a 'matrix'" do
   it "converts every element into a Node" do
 
     tests.each do |test|
-      map = Map.new
-
-      test.each do |row|
-
-        row.each do |elem|
-          map.add(Node.new(elem))
-        end
-
-      end
-
-      expect(map.nodes.length).to eq(test.flatten.length)
+      my_map.nodes.clear
+      my_map.fromArray(test)
+      expect(my_map.nodes.length).to eq(test.flatten.length)
     end
 
     #Check if the graph has the same number of nodes as the test array
   end
 
   it "saves the connections with the adjacent numbers" do
-
+    my_map.fromArray(tests[2])
+    expect(my_map.nodes[0].connections).to match_array([6,7])
+    expect(my_map.nodes[1].conenctions).to match_array([2,9,8])
+    expect(my_map.nodes[5].connections).to match_array([7,9,6,7])
   end
 end
 

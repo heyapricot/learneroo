@@ -9,4 +9,12 @@ class Map
     @nodes.push(node)
   end
 
+  def fromArray(ar)
+    ar.each do |row|
+      row.each do |elem|
+        add(Node.new(elem))
+      end
+    end
+  end
+
 end
