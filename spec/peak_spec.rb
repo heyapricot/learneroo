@@ -29,13 +29,22 @@ context "creating a graph from a 'matrix'" do
     expect(my_map.nodes[1].connections).to match_array([2,9,8])
     expect(my_map.nodes[5].connections).to match_array([7,9,6,7])
   end
+
+  it "gets a node using data as input" do
+
+  end
 end
 
 context "finding the peaks" do
+
+  it "tells if a node is peak" do
+
+  end
+
+
   it "returns an array of values higher than their connections" do
-    graph = Graph.new
     tests = Array.new
-    results = Array.new
+    peaks = Array.new
 
     tests.push([[9, 8, 5], [5, 6, 3], [8, 4, 1]])
     tests.push([[8, 12], [9, 3]])
@@ -46,13 +55,18 @@ context "finding the peaks" do
     #Be very careful with the order of tests and results
     #results contains the smallest and largest area around a peak
 
-    results.push([9,8])
-    results.push([12,9])
-    results.push([12,11,10])
-    results.push([10,4,7])
-    results.push([14,13,8])
+    peaks.push([9,8])
+    peaks.push([12,9])
+    peaks.push([12,11,10])
+    peaks.push([10,7,4])
+    peaks.push([14,13,8])
 
-    expect(graph.find_peaks).to match_array
+    tests.each_with_index do |test,idx|
+      graph = Graph.new
+      graph.fromArray(test)
+      expect(graph.get_peaks.sort.reverse).to match_array(results[idx])
+    end
+
   end
 end
 

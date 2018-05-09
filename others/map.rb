@@ -10,6 +10,7 @@ class Map
   end
 
   def fromArray(ar)
+    #What if we flatten the original array, get the row size and use it to determine when a new column starts
     ar.each_with_index do |row, row_idx|
       row.each_with_index do |elem, col_idx|
         add(Node.new(elem,makeConnections(row_idx,col_idx,ar)))
