@@ -17,6 +17,12 @@ class Map
     end
   end
 
+  def is_peak(node)
+    node.data > node.connections.max ? true : false
+  end
+
+  
+
   private
 
   def makeConnections(row_idx, col_idx, ar)
