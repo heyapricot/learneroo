@@ -28,13 +28,6 @@ context "creating a graph from a 'matrix'" do
     expect(my_map.nodes[0].connections.map{|node| node.data}).to match_array([6,7])
     expect(my_map.nodes[1].connections.map{|node| node.data}).to match_array([2,9,8])
     expect(my_map.nodes[5].connections.map{|node| node.data}).to match_array([7,9,6,7])
-    my_map.nodes[0].connections.each do |node|
-      conns_data.push(node.data)
-    end
-
-    expect(conns_data).to match_array([6,7])
-    #expect(my_map.nodes[1].connections).to match_array([2,9,8])
-    #expect(my_map.nodes[5].connections).to match_array([7,9,6,7])
   end
 
   it "gets a node using data as input" do

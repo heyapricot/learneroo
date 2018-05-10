@@ -35,16 +35,6 @@ class Map
 
   def makeConnections(rows, columns)
 
-    row_idx = 0
-
-    #Get the adjacent column connections
-    nodes.each_with_index do |node, idx|
-
-      horizontal_connections(node, idx, columns)
-      vertical_connections(node,idx,row_idx,rows)
-
-      row_idx += 1 if idx % rows == 0
-    end
     # Get the adjacent row connections
     grid = nodes.each_slice(rows).to_a
     transposed_nodes = grid.transpose.flatten
@@ -61,6 +51,20 @@ class Map
         node.connections.push(transposed_nodes[row - 1])
         node.connections.push(transposed_nodes[row + 1])
       end
+    end
+  end
+
+  def getConnections(rows, columns)
+    row_idx = 0
+
+    #Get the adjacent column connections
+    nodes.each_with_index do |node, idx|
+
+      horizontal_connections(node, idx, columns)
+      vertical_connections(node,idx,row_idx,rows)
+
+      row_idx += 1 if idx % rows == 0
+
     end
   end
 
