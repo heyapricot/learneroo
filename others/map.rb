@@ -10,26 +10,16 @@ class Map
   end
 
   def fromArray(ar)
-
     rows = ar.length
     columns = ar[0].length
 
-    ar.flatten.each do |elem|
-      add(Node.new(elem))
-    end
-
+    ar.flatten.each { |elem| add(Node.new(elem)) }
     makeConnections(rows,columns)
-
   end
 
   def is_peak(node)
-    node.data > node.connections.max ? true : false
+    node.data > node.connections.map{|conn| conn.data}.max ? true : false
   end
-
-  #2 runs, first run creates the nodes from the array data
-  # Second run stores the connections
-
-
 
   private
 
