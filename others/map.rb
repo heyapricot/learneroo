@@ -35,23 +35,45 @@ class Map
 
   def makeConnections(rows, columns)
 
+    row_idx = 0
+
     #Get the adjacent column connections
-    nodes.each_with_index do |node, col|
-      case col % columns
-      when 0
-        #If I'm on the first column just add the element on the right
-        node.connections.push(nodes[col + 1])
-      when columns - 1
-        #If I'm on the last column just add the element on the left
-        node.connections.push(nodes[col - 1])
-      else
-        #If I'm not at the border add left and right
-        node.connections.push(nodes[col - 1])
-        node.connections.push(nodes[col + 1])
-      end
+    nodes.each_with_index do |node, idx|
+
+      horizontal_connections(node, idx, columns)
+      vertical_connections(node,idx,row_idx,rows)
+
+      row_idx += 1 if idx % rows == 0
     end
     #Get the adjacent row connections
 
+  end
+
+  def horizontal_connections(node, col_idx, col_length)
+    case col_idx
+    when 0
+      #If I'm on the first column just add the element on the right
+      node.connections.push(nodes[col_idx + 1])
+    when col_length - 1
+      #If I'm on the last column just add the element on the left
+      node.connections.push(nodes[col_idx - 1])
+    else
+      #If I'm not at the border add left and right
+      node.connections.push(nodes[col_idx - 1])
+      node.connections.push(nodes[col_idx + 1])
+    end
+  end
+
+  def vertical_connections(node, col_idx, row_idx, row_length)
+    case row_idx
+    when 0
+      node.connections.push(nodes[col_idx + ((row_idx + 1) * row_length)])
+    when row_length - 1
+      node.connections.push(nodes[col_idx + ((row_idx - 1) * row_length)])
+    else
+      node.connections.push(nodes[col_idx + ((row_idx + 1) * row_length)])
+      node.connections.push(nodes[col_idx + ((row_idx - 1) * row_length)])
+    end
   end
 
 end
