@@ -10,48 +10,48 @@ class Map
   end
 
   def fromArray(ar)
-    #What if we flatten the original array, get the row size and use it to determine when a new column starts
-    ar.each_with_index do |row, row_idx|
-      row.each_with_index do |elem, col_idx|
-        add(Node.new(elem,makeConnections(row_idx,col_idx,ar)))
-      end
+
+    rows = ar.length
+    columns = ar[0].length
+
+    ar.flatten.each do |elem|
+      add(Node.new(elem))
     end
+
+    makeConnections(rows,columns)
+
   end
 
   def is_peak(node)
     node.data > node.connections.max ? true : false
   end
 
+  #2 runs, first run creates the nodes from the array data
+  # Second run stores the connections
+
   
 
   private
 
-  def makeConnections(row_idx, col_idx, ar)
-    conns = Array.new
-    last_col = (ar[row_idx].length - 1)
-    last_row = (ar.length - 1)
-    #Detect first element of row
-    if col_idx == 0
-      conns.push(ar[row_idx][1])
-    elsif col_idx == last_col
-      conns.push(ar[row_idx][last_col - 1])
-    else
-      conns.push(ar[row_idx][col_idx - 1])
-      conns.push(ar[row_idx][col_idx + 1])
+  def makeConnections(rows, columns)
+
+    #Get the adjacent column connections
+    nodes.each_with_index do |node, col|
+      case col % columns
+      when 0
+        #If I'm on the first column just add the element on the right
+        node.connections.push(nodes[col + 1])
+      when columns - 1
+        #If I'm on the last column just add the element on the left
+        node.connections.push(nodes[col - 1])
+      else
+        #If I'm not at the border add left and right
+        node.connections.push(nodes[col - 1])
+        node.connections.push(nodes[col + 1])
+      end
     end
-    # Detect last element of row
+    #Get the adjacent row connections
 
-    if row_idx == 0
-      conns.push(ar[row_idx + 1][col_idx])
-    elsif row_idx == last_row
-      conns.push(ar[row_idx - 1][col_idx])
-    else
-      conns.push(ar[row_idx - 1][col_idx])
-      conns.push(ar[row_idx + 1][col_idx])
-    end
-
-
-    conns
   end
 
 end
