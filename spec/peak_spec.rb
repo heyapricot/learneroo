@@ -25,9 +25,9 @@ context "creating a graph from a 'matrix'" do
 
   it "saves the connections with the adjacent numbers" do
     my_map.fromArray(tests[2])
-
-    conns_data = Array.new
-
+    expect(my_map.nodes[0].connections.map{|node| node.data}).to match_array([6,7])
+    expect(my_map.nodes[1].connections.map{|node| node.data}).to match_array([2,9,8])
+    expect(my_map.nodes[5].connections.map{|node| node.data}).to match_array([7,9,6,7])
     my_map.nodes[0].connections.each do |node|
       conns_data.push(node.data)
     end
