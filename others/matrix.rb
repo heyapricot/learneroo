@@ -1,8 +1,7 @@
 class Node
-  attr_accessor :area, :index, :data, :connections, :visited, :queued
+  attr_accessor :data, :connections, :visited, :queued
 
   def initialize
-    @area = 0
     @connections = Array.new
     @visited = false
     @queued = false
@@ -22,10 +21,9 @@ def array2matrix(array)
   matrix = Matrix.new
   n = array.length
 
-  array.flatten.each_with_index do |value, idx|
+  array.flatten.each do |value|
     node = Node.new
     node.data = value
-    node.index = idx
     matrix.nodes.push(node)
   end
   connect_matrix(matrix, n)
