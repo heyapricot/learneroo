@@ -1,5 +1,5 @@
-require_relative "../others/map"
-require_relative "../graphs/graph"
+require_relative "../../lib/graphs/map"
+require_relative "../../lib/graphs/graph"
 
 context "creating a graph from a 'matrix'" do
   let(:my_map) { Map.new }
@@ -13,7 +13,6 @@ context "creating a graph from a 'matrix'" do
   tests.push(	[[3, 6, 9, 11, 3], [5, 8, 12, 4, 6], [7, 10, 13, 2, 14], [0, 1, 5, 9, 3], [2, 8, 6, 4, 0]])
 
   it "converts every element into a Node" do
-
     tests.each do |test|
       my_map.nodes.clear
       my_map.fromArray(test)
@@ -54,7 +53,8 @@ context "finding the peaks" do
   end
 
 
-  pending "returns an array of values higher than their connections" do
+  it "returns an array of values higher than their connections" do
+    pending "Need to redifine"
     tests = Array.new
     peaks = Array.new
 
@@ -84,7 +84,8 @@ end
 
 
 context "finding the peaks of highest area" do
-  pending "returns the two peaks with highest area" do
+  it "returns the two peaks with highest area" do
+    pending "Need to redifine"
     graph = Graph.new
 
     tests = Array.new

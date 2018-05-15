@@ -1,15 +1,4 @@
-class Node
-
-  attr_accessor :data, :visited, :connections
-
-  def initialize(data, connections = [])
-    @data = data
-    @visited = false
-    @connections = connections
-  end
-
-end
-
+require_relative "../node"
 class Graph
 
   attr_accessor :nodes
