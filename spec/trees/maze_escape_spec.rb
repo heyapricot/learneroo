@@ -1,11 +1,30 @@
-require_relative "../../lib/node"
+require_relative "../../lib/maze"
 
-describe "when transforming a maze into a tree" do
+describe "Maze class methods" do
+  let(:maze){Maze.new}
+
+  it "can retrieve a node by specifying coordinates" do
+    pending "Not implemented"
+    expect(maze.cells([0,0])).to be_a(Node)
+    expect(maze.cells([0,0]).coordinates).to match_array([0,0])
+  end
+end
+
+
+describe "Creating a Maze from an array" do
+  let(:maze) {Maze.new.fromArray([[0, 0, 0, 0, 0], [0, 1, 0, 1, 0], [0, 1, 0, 1, 1], [0, 1, 0, 0, 0], [0, 0, 0, 1, 9]])}
+
   it "keeps the same number of elements" do
     pending "Method is not implemented"
-    maze = []
-    tree = mazeToTree(maze)
-    expect(tree.length).to eq(maze.flatten.length)
+    expect(maze.cells.keys.length).to eq(maze.flatten.length)
+  end
+
+  it "keeps the connections" do
+    pending "Method is not implemented"
+    expect(maze.cells([0,0]).connections.length).to eq(2)
+    expect(maze.cells([4,4]).connections.length).to eq(0)
+    expect(maze.cells([0,0].connections[0].coordinates)).to match_array([0,1])
+    expect(maze.cells([0,0].connections[1].coordinates)).to match_array([1,0])
   end
 end
 
