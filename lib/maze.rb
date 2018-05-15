@@ -5,7 +5,6 @@ class Maze
 
   def initialize(array = nil)
     @cells = Hash.new
-
     fromArray(array) unless array.nil?
   end
 
@@ -23,21 +22,25 @@ class Maze
       verPos = idx / numRows
 
       cell.coordinates = [horPos,verPos]
-      cell.connections = getConnections(horPos,verPos,numRows,numCols)
       @cells[cell.coordinates] = cell
-
     end
+
+    getConnections(numRows,numCols)
+
   end
 
 
   private
 
-  def getConnections(x,y,numRows,numCols)
-    connections = Array.new
+  def getConnections(numRows,numCols)
 
-    connections.push([x + 1, y]) unless x == (numCols - 1)
-    connections.push([x,y + 1]) unless y == (numRows - 1)
+    @cells.values.each do |cell|
+      x = cell.coordinates[0]
+      y = cell.coordinates[1]
 
-    return connections
+      cell.connections.push(@cells[[x + 1, y]]) unless x == (numCols - 1)
+      cell.connections.push(@cells[[x,y + 1]]) unless y == (numRows - 1)
+    end
+
   end
 end

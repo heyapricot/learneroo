@@ -19,11 +19,10 @@ context "Creating a Maze from an array" do
   end
 
   it "keeps the connections" do
-    pending "Method is not implemented"
     expect(maze.cells[[0,0]].connections.length).to eq(2)
     expect(maze.cells[[4,4]].connections.length).to eq(0)
-    expect(maze.cells[[0,0]].connections[0].coordinates).to match_array([0,1])
-    expect(maze.cells[[0,0]].connections[1].coordinates).to match_array([1,0])
+    expect(maze.cells[[0,0]].connections[0].coordinates).to match_array([1,0])
+    expect(maze.cells[[0,0]].connections[1].coordinates).to match_array([0,1])
   end
 end
 
