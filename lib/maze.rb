@@ -29,6 +29,24 @@ class Maze
 
   end
 
+  def explore(start = [0,0], output = [])
+    node = @cells[start]
+
+    output.push(node.coordinates)
+    node.visited = true
+
+    node.connections.each do|conn|
+
+
+      unless conn.visited || conn.data == 1
+        explore(conn.coordinates,output)
+      end
+
+
+    end
+    output
+  end
+
 
   private
 
