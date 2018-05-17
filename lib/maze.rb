@@ -37,13 +37,12 @@ class Maze
 
     node.connections.each do|conn|
 
-
       unless conn.visited || conn.data == 1
         explore(conn.coordinates,output)
       end
 
-
     end
+    print "Reached an end. Current node: #{node.coordinates}, Current path: #{output}\n"
     output
   end
 
