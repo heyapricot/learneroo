@@ -1,7 +1,10 @@
 require_relative "node"
 
 class Maze
+
+
   attr_accessor :cells
+  attr_reader :shortest
 
   def initialize(array = nil)
     @cells = Hash.new
@@ -29,7 +32,7 @@ class Maze
 
   end
 
-  def explore(start = [0,0], output = [])
+  def explore(start = [0,0], output = [], stack = [])
     node = @cells[start]
 
     output.push(node.coordinates)
@@ -42,8 +45,12 @@ class Maze
       end
 
     end
-    print "Reached an end. Current node: #{node.coordinates}, Current path: #{output}\n"
-    output
+
+    if node.data == 9
+      @shortest = output.dup
+    end
+
+    output.pop
   end
 
 
