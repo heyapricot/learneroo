@@ -46,9 +46,7 @@ class Maze
 
     end
 
-    if node.data == 9
-      @shortest = output.dup
-    end
+    @shortest = output.dup if node.data == 9
 
     output.pop
   end
