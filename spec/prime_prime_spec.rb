@@ -9,14 +9,14 @@ tests
 
 results = [3,11,7]
 
-describe get_primes do
+describe "get_primes" do
 
   it "gets the prime numbers in the input array" do
     expect(get_primes(tests[0])).to match_array([2,3,5])
   end
 end
 
-describe get_prime_primes do
+describe "get_prime_primes" do
 
   it "gets the prime number that repeats the most" do
     tests.each_with_index do |test,idx|
