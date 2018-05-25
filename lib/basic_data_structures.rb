@@ -66,4 +66,33 @@ module DataStructures
 
     end
   end
+
+  class Queue
+    def initialize
+      @list = LinkedList.new
+    end
+
+    def push(num)
+      @list.add(num)
+    end
+
+    def dequeue
+
+      unless @list.head.nil?
+        output = @list.head.data
+
+        unless @list.head == @list.tail
+          @list.head = @list.head.next
+        else
+          @list.head = nil
+        end
+      else
+        output = -1
+      end
+
+      output
+    end
+
+  end
+
 end
