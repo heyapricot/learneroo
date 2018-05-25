@@ -14,7 +14,6 @@ module LinkedList
 
     def initialize(head = nil)
       @head = Node.new if @head.nil?
-      @tail = @head
     end
 
     def add(num)
