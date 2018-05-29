@@ -37,6 +37,9 @@ module DataStructures
   end
 
   class Stack
+
+    attr_reader :max
+
     def initialize
       @list = LinkedList.new
     end
@@ -44,6 +47,8 @@ module DataStructures
 
     def push(num)
       @list.add(num)
+      @max = num if @max.nil? || num > @max
+
     end
 
     def pop

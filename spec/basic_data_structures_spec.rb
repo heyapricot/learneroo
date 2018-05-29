@@ -29,4 +29,8 @@ describe "stack" do
       expect(@queue.dequeue).to eq(n)
     end
   end
+
+  it "returns the max of a stack/array" do
+
+  end
 end
