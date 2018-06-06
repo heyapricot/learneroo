@@ -17,15 +17,23 @@ module Tree
       @head = Node.new(head_data) unless head_data.nil?
     end
 
-    def arrayToTree(array, idx = 0, node = @head = Node.new)
+    def fromArray(array, idx = 0, node = @head = Node.new)
 
       node.data = array[idx]
 
       unless (2 * idx) + 1 > (array.length - 1)
-        arrayToTree(array, (2 * idx) + 1, node.left = Node.new)
-        arrayToTree(array, (2 * idx) + 2, node.right = Node.new)
+        fromArray(array, (2 * idx) + 1, node.left = Node.new)
+        fromArray(array, (2 * idx) + 2, node.right = Node.new)
       end
 
+    end
+
+    def preOrder(node = @head, output = [])
+      output.push(node.data)
+      preOrder(node.left,output) unless node.left.nil? || node.left.data == 0
+      preOrder(node.right,output) unless node.right.nil? || node.right.data == 0
+
+      output
     end
 
   end
