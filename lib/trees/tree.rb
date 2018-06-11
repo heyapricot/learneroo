@@ -37,16 +37,24 @@ module Tree
       output
     end
 
+    def isBalanced?(node = @head)
 
-    def leftCount(node = @head)
-      unless node.left.nil?
-        count = leftCount(node.left)
-        return count + 1
-      else
-        return 0
-      end
+      result = (leftCount(node) - rightCount(node)).abs <= 1
+      result = result && isBalanced?(node.left) unless node.left.nil?
+      result = result && isBalanced?(node.right) unless node.right.nil?
+      return  result
+
     end
 
+    private
+
+    def leftCount(node = @head)
+      node.left.nil? ? 0 : leftCount(node.left) + 1
+    end
+
+    def rightCount(node = @head)
+      node.right.nil? ? 0 : rightCount(node.right) + 1
+    end
 
   end
 end
