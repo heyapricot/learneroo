@@ -1,22 +1,20 @@
-require_relative "../../lib/graphs/graph"
-require_relative "../../lib/node"
-
+require_relative '../../lib/graphs/graph'
 describe Graph do
 
   context "when a Graph is instantiated" do
-    let(:graph) {Graph.new}
+    let(:graph) {Graph::Graph.new}
 
     it "can add Nodes to itself" do
       NUMBER_OF_NODES = 10
       NUMBER_OF_NODES.times do |n|
-        graph.add(Node.new(n))
+        graph.add(Graph::Node.new(n))
       end
       expect(graph.nodes.length).to be NUMBER_OF_NODES
     end
 
     it "can get a specific node" do
       NODE_DATA = 6
-      graph.add(Node.new(NODE_DATA))
+      graph.add(Graph::Node.new(NODE_DATA))
       expect(graph.nodes[NODE_DATA].data).to be NODE_DATA
     end
 
@@ -47,7 +45,7 @@ describe Graph do
 
   context "doing breadth first search" do
 
-    let(:graph) {Graph.new}
+    let(:graph) {Graph::Graph.new}
 
     before do
       ar = [[2], [4], [5, 0, 3], [2], [1, 5], [4, 2]]
@@ -62,7 +60,7 @@ describe Graph do
 
   context "doing depth first search" do
 
-    let(:graph) {Graph.new}
+    let(:graph) {Graph::Graph.new}
 
     before do
       ar = [[2], [4], [5, 0, 3], [2], [1, 5], [4, 2]]
@@ -76,7 +74,7 @@ describe Graph do
 
   context "checking the graph is one connected" do
 
-    let(:graph) {Graph.new}
+    let(:graph) {Graph::Graph.new}
 
     it "returns true for a one conected graph" do
       ar = [[1, 2], [0, 3, 4], [0, 5, 6], [1], [1], [2], [2]]
@@ -94,7 +92,7 @@ describe Graph do
 
   context "detecting cycles" do
 
-    let(:graph) {Graph.new}
+    let(:graph) {Graph::Graph.new}
 
     it "returns true for a graph with a cycle" do
       tests = Array.new
@@ -119,7 +117,8 @@ describe Graph do
         graph.fromArray(test)
         expect(graph.hasCycle?).to be false
         graph.nodes.clear
-      end    end
+      end
+    end
   end
 
 

@@ -1,9 +1,8 @@
-require_relative '../lib/trees/tree'
-
+require_relative '../../lib/graphs/graph'
 
 describe "Tree.preOrder" do
 
-  let(:tree){Tree::Tree.new}
+  let(:tree){Graph::Tree.new}
 
   it "returns an array with the tree elements in preOrder" do
     tree.fromArray([1,7,5,2,6,0,9,3,7,5,11,0,0,4,0])
@@ -13,7 +12,7 @@ end
 
 describe "Tree.isBalanced?" do
 
-  let(:tree){Tree::Tree.new}
+  let(:tree){Graph::Tree.new}
 
   it "returns true if the tree is height-balanced" do
     tree.fromArray([1,2,3,4,5,6,7])
