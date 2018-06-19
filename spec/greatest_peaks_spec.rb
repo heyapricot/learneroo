@@ -9,10 +9,7 @@ describe "Kingdom Map" do
     it "stores every value of the array as a Node in a Hash with the coordinates in the Array as key" do
       km.fromArray(input)
       expect(km.nodes.keys.length).to eq input.flatten.length
-      input.each_with_index do |row, ridx|
-        row.each_with_index {|n,cidx| expect(km.nodes[[cidx,ridx]]).to eq(n)}
-      end
-
+      expect(km.nodes.values.map{|nod| nod.data}).to match_array(input.flatten)
     end
   end
 end
