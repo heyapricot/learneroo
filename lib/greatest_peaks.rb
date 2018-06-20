@@ -3,24 +3,24 @@ module GreatestPeaks
   include Graph
 
   class KingdomMap < Graph
-    def fromArray(ar)
-      #rq -> Row quantity
-      rq = ar.length
-      #cq -> Column quantity
-      cq = ar.first.length
+    def fromArray(ar,row_quantity,column_quantity)
+
+      rq = row_quantity
+      cq = column_quantity
 
       @nodes = Hash.new
-      ar.each_with_index {|row, ridx| row.each_with_index {|col, cidx| @nodes[[cidx,ridx]] = Graph::Node.new(col) } }
+      ar.each_with_index {|n,idx| @nodes[[idx % column_quantity, idx / row_quantity]] = Graph::Node.new(n) }
 
       #Get the connections
-      @nodes.length.times do |n|
-        x = n / cq
-        y = n % rq
+      @nodes.values.each_with_index do |nod,idx|
 
-        @nodes[[x,y]].connections << @nodes[[x - 1 , y]] unless x == 0
-        @nodes[[x,y]].connections << @nodes[[x + 1 , y]] unless x == cq - 1
-        @nodes[[x,y]].connections << @nodes[[x , y]] unless y == 0
-        @nodes[[x,y]].connections << @nodes[[x , y]] unless y == rq - 1
+        x = idx % cq
+        y = idx / rq
+
+        nod.connections << @nodes[[x - 1 , y]] unless x == 0
+        nod.connections << @nodes[[x + 1 , y]] unless x == cq - 1
+        nod.connections << @nodes[[x , y - 1]] unless y == 0
+        nod.connections << @nodes[[x , y + 1]] unless y == rq - 1
 
       end
     end
