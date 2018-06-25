@@ -18,7 +18,7 @@ end
 describe "Kingdom Map" do
   describe "fromArray" do
 
-    input =  [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14 , 15]]
+    input =  [[2, 6, 9, 11], [7, 8, 9, 8], [6, 7, 12, 9], [10, 7, 6, 4]]
     km = GreatestPeaks::KingdomMap.new
     km.fromArray(input.flatten,4,4)
 
@@ -33,5 +33,12 @@ describe "Kingdom Map" do
       end
 
     end
+
+    it "Stores the 'peaks' in an instance variable" do
+      expect(km.peaks.map{|nod| nod.data}).to match_array([11,12,10])
+    end
   end
+
+
+
 end

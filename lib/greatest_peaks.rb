@@ -3,6 +3,12 @@ module GreatestPeaks
   include Graph
 
   class KingdomMap < Graph
+    attr_reader :peaks
+
+    def initialize
+      @peaks = Array.new
+    end
+
     def fromArray(ar,row_quantity,column_quantity)
 
       rq = row_quantity
@@ -23,7 +29,17 @@ module GreatestPeaks
         nod.connections << @nodes[[x , y + 1]] unless y == rq - 1
 
       end
+      getPeaks
     end
+
+    private
+
+    def getPeaks
+      @nodes.values.each do |nod|
+        @peaks << nod if nod.connections.map{|n|n.data}.select{|n| n > nod.data }.empty?
+      end
+    end
+
   end
 
 end
