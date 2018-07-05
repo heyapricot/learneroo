@@ -37,8 +37,12 @@ describe "Kingdom Map" do
     it "Stores the 'peaks' in an instance variable" do
       expect(km.peaks.map{|nod| nod.data}).to match_array([11,12,10])
     end
-  end
 
+    it "Stores the dominance area of the peaks" do
+      expect(km.areas.keys.map{|nod| nod.data}).to match_array([11,12,10])
+      expect(km.areas.values.map{|v|v.length}).to match_array([3,4,9])
+    end
+  end
 
 
 end
