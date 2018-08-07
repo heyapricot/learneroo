@@ -25,5 +25,3 @@ def merge(first,second)
   end
   aux
 end
-
-mergesort([-3, 2, 2, 2, 4, -2, 0, 1, 5, 7])
