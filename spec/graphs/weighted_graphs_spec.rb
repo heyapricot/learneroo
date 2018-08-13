@@ -9,7 +9,7 @@ describe "weighted graphs" do
         [[0, 1, 1, 0, 0, 0, 0, 0, 0, 1], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 1, 1, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 0, 1, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 1, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
     ]
   end
-  let(:results){["0 2 1 1 2 2 ", "0 1 1 ", "0 1 1 2 2 1 1", "0 1 1 3 2 2 3 3 4 1"]}
+  let(:results){["0 2 1 1 2 2", "0 1 1", "0 1 1 2 2 1 1", "0 1 1 3 2 2 3 3 4 1"]}
 
   let(:conns_test){[[[[0,2],1],[[0,3],3]],[[[1,3],5]],[[[2,0],1],[[2,3],2],[[2,4],1],[[2,5],4]],[[[3,0],3],[[3,1],5],[[3,2],2],[[3,4],7]],[[[4,2],1],[[4,3],7],[[4,5],2]],[[[5,2],4],[[5,4],2]]]}
 
@@ -25,7 +25,11 @@ describe "weighted graphs" do
     expect(wg.connections).to match_array(conns_test)
   end
 
-  pending "returns the shortest path" do
-    tests.each_with_index{|t,idx| expect(weighted_graphs(t)).to eq(results[idx])}
+  it "returns the shortest path of nodes" do
+    tests.each_with_index do |t,idx|
+      wg = WeightedGraph.new
+      wg.from_matrix(t)
+      expect("0 " + wg.bfs.sort.map{|k,v| v.length - 1 }.join(" ")).to eq(results[idx])
+    end
   end
 end

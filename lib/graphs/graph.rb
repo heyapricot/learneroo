@@ -79,7 +79,7 @@ module Graph
       end
     end
 
-    def bfs(start = 0, queue = [], output = [])
+    def bfs(start = 0, queue = [], output = [], previous = [0])
 
       node = nodes[start]
 

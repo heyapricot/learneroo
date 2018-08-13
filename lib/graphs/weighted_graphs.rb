@@ -54,6 +54,19 @@ class WeightedGraph
     distance
   end
 
+  def bfs(id = 0, queue = [], paths = Hash.new([id]), previous = id)
+    current = get_node(id)
+    current.visited = true
+    #previous = id
+    get_node_connections(current).keys.select{|conn| !conn.visited }.each do |conn|
+      paths[conn.id] = paths[id].dup + [conn.id]
+      queue << conn.id unless conn.visited or queue.include?(conn.id)
+      conn.visited = true
+    end
+    bfs(queue.shift, queue, paths, previous) unless queue.empty?
+    paths
+  end
+
   private
 
   def add_connection(origin, destiny, weight = nil)
