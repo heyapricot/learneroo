@@ -67,6 +67,22 @@ class WeightedGraph
     paths
   end
 
+  def prim_mst(id = 0)
+    visited_nodes = []
+    nodes_key_value = Hash.new(Float::INFINITY)
+    nodes_key_value[id] = 0
+    while visited_nodes.length != nodes.length
+      current = nodes_key_value.select{|id,weight| !visited_nodes.include?(id) }.sort_by{|id,weight| [weight,id]}.first.first
+      current = get_node(current)
+      visited_nodes << current.id
+      get_node_connections(current).each do |node, weight|
+        nodes_key_value[node.id] = weight if weight < nodes_key_value[node.id] and !visited_nodes.include?(node.id)
+      end
+    end
+    visited_nodes.shift
+    visited_nodes.map{|id| nodes_key_value[id] }
+  end
+
   private
 
   def add_connection(origin, destiny, weight = nil)
