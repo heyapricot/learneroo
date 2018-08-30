@@ -18,24 +18,31 @@ class Tree < WeightedGraph
   end
 
   def no_recursion_level_count
-    children_per_level = [0]
-    visit_count = 0
-    level = 0
-    nodes.each do |current_node|
-      if visit_count == children_per_level[-1]
-        #I'm the last
-        level += 1
-        children_per_level.shift
+    queue = []
+    queue << get_node(0)
+    height = 0
+
+    while true
+      node_quantity = queue.length
+      if node_quantity == 0
+        return height
+      else
+        height += 1
       end
-      child_count = get_node_connections(get_node(current_node)).length
-      children_per_level.empty? ? children_per_level << child_count : children_per_level[-1] += child_count
-      visit_count += 1
+
+      while node_quantity > 0
+        node = queue.shift
+        get_node_connections(node).keys.each{|conn| queue << conn}
+        node_quantity -= 1
+      end
     end
-    return level
+  end
+
+  def bfs(id = 0, queue = [], &block)
+    current = get_node(id)
+    yield current
+    get_node_connections(current).keys.each{ |conn| queue << conn unless conn.visited }
+    bfs(queue.shift.id,queue, &block) unless queue.empty?
   end
 
 end
-
-tree = Tree.new
-tree.from_array([1,7,5,2,6,0,9,3,7,5,11,0,0,4,0])
-puts tree.no_recursion_level_count

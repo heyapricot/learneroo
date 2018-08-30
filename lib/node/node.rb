@@ -1,6 +1,6 @@
 module Node
   class Node
-    attr_reader :id
+    attr_reader :id, :data
     attr_accessor :visited
 
     def initialize(id = nil, data = nil)
