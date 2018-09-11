@@ -11,7 +11,7 @@ describe "closest_pairs" do
   let(:results){[0.21391,0.050088,0.016657,0.012961]}
   it "returns the shortest distance between two points" do
     tests.each_with_index do |t,idx|
-      expect(closest_pairs(build_pairs(t))).to be_within(0.01).of(results[idx])
+      expect(closest_pairs_brute_force(build_pairs(t))).to be_within(0.00001).of(results[idx])
     end
   end
 end
