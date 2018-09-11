@@ -12,8 +12,8 @@ class WeightedGraph
     set_connections(array)
   end
 
-  def add_node(identifier)
-    node = Node::Node.new(identifier)
+  def add_node(identifier, data = nil)
+    node = Node::Node.new(identifier, data)
     @node_list[identifier].nil? ? @node_list[identifier] = [node] : @node_list[identifier] << node
     @connection_list[node] = Hash.new
   end
